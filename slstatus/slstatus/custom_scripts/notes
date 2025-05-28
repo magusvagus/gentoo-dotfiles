@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+int main(){
+  FILE *input_file = fopen("your_input_file.txt", "r");
+  int line_count = 0;
+
+  while (line_count < 5){
+    char line[100];
+    fgets(line, sizeof(line), input_file);
+    line_count++;
+
+    if (line_count == 5){
+      printf("%s\n", line); // print the fifth line to console
+     }
+   }
+
+  fclose(input_file);
+
+  return 0;
+
+
+
+
+
+  ```c
+#include <stdio.h>
+
+int main() {
+    printf("Output: `%s`\n", `echo "Hello, World!"`);
+    return 0;
+}
+```
+
+Alternatively, you can use the `subshell` function to execute
+the bash command and capture its output:
+
+```c
+#include <stdio.h>
+
+int main() {
+    char* output = subshell("echo \"Hello, World!\"");
+    printf("Output: %s\n", output);
+    return 0;
+}
+```
+
+Make sure to include the `<string.h>` header file for the
+`strncpy` function if you choose to use the `subshell`
+approach:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char* output = subshell("echo \"Hello, World!\"");
+    char buffer[1024];
+    strncpy(buffer, output, sizeof(buffer) - 1);
+    buffer[sizeof(buffer) - 1] = '\0';
+    printf("Output: %s\n", buffer);
+    return 0;
+}
+```
